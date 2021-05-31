@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Apl_Kris;
-
+//testos
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
