@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**Tesssssssssssssssssss
+/**Tesssssa
  *
  * @author micro
  */
@@ -406,7 +406,7 @@ public class Apl_laundry extends javax.swing.JFrame {
             st = con.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                dtm.addRow(new Object[]{no++, rs.getString("Tanggal"), rs.getString("Kode_pelanggan"), 
+                dtm.addRow(new Object[]{no++, rs.getString("Tanggal"), rs.getString("Kode_pelanggan"),
                     rs.getString("Nama_pelanggan"), rs.getString("No_telp"), rs.getString("Alamat"),
                     rs.getString("Berat_Pakaian"), rs.getString("Harga"), rs.getString("Total_bayar")});
             }
