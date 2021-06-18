@@ -52,7 +52,6 @@ public class Apl_laundry extends javax.swing.JFrame {
         bsimpan.setEnabled(false);
         bupdate.setEnabled(false);
         bdelete.setEnabled(false);
-        //bedit.setEnabled(false);
         cbharga.setEnabled(false);
 
         tkodepel.setEnabled(false);
