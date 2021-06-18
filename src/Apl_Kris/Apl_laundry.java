@@ -11,7 +11,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**Tesssssar
+/**
+ * Tesssssar
  *
  * @author micro
  */
@@ -21,7 +22,6 @@ public class Apl_laundry extends javax.swing.JFrame {
     private Connection con;
     private Statement st;
     private ResultSet rs;
-    private PreparedStatement ps;
     private DefaultTableModel dtm;
     public int harga;
     public float berat, totalbyr;
@@ -33,12 +33,8 @@ public class Apl_laundry extends javax.swing.JFrame {
         initComponents();
         koneksi();
         tgl();
-
-        try {
-            tabel();
-        } catch (Exception e) {
-        }
-
+        tabel();
+        nonAktif();
     }
 
     public void koneksi() {
@@ -50,6 +46,37 @@ public class Apl_laundry extends javax.swing.JFrame {
             Lbstatus.setText("DATABASE TIDAK TERKONEKSI");
             JOptionPane.showMessageDialog(null, "DATABASE TIDAK TERKONEKSI");
         }
+    }
+
+    private void nonAktif() {
+        bsimpan.setEnabled(false);
+        bupdate.setEnabled(false);
+        bdelete.setEnabled(false);
+        //bedit.setEnabled(false);
+        cbharga.setEnabled(false);
+
+        tkodepel.setEnabled(false);
+        talamat.setEnabled(false);
+        tberat.setEnabled(false);
+        tharga.setEnabled(false);
+        tkodepel.setEnabled(false);
+        tnamapel.setEnabled(false);
+        tnotlp.setEnabled(false);
+        ttotalbayar.setEnabled(false);
+    }
+
+    private void aktif() {
+        bsimpan.setEnabled(true);
+        cbharga.setEnabled(true);
+
+        tkodepel.setEnabled(true);
+        talamat.setEnabled(true);
+        tberat.setEnabled(true);
+        tharga.setEnabled(true);
+        tkodepel.setEnabled(true);
+        tnamapel.setEnabled(true);
+        tnotlp.setEnabled(true);
+        ttotalbayar.setEnabled(true);
     }
 
     private void tgl() {
@@ -81,8 +108,8 @@ public class Apl_laundry extends javax.swing.JFrame {
                     rs.getString("Berat_Pakaian"), rs.getString("Harga"), rs.getString("Total_bayar")});
             }
             tabeldata.setModel(dtm);
-        } catch (SQLException e) {
-            System.out.println("error :" + e.getMessage());
+        } catch (Exception e) {
+            tabeldata.setModel(dtm);
         }
     }
 
@@ -127,7 +154,6 @@ public class Apl_laundry extends javax.swing.JFrame {
         bcancel = new javax.swing.JButton();
         bexit = new javax.swing.JButton();
         tnotlp = new javax.swing.JTextField();
-        bview = new javax.swing.JButton();
         bsimpan = new javax.swing.JButton();
         bupdate = new javax.swing.JButton();
         bdelete = new javax.swing.JButton();
@@ -148,6 +174,8 @@ public class Apl_laundry extends javax.swing.JFrame {
         breconnect = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         cbharga = new javax.swing.JComboBox<>();
+        btambah = new javax.swing.JButton();
+        bedit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -196,6 +224,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         });
         getContentPane().add(tharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 160, -1));
 
+        ttotalbayar.setEditable(false);
         ttotalbayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ttotalbayarActionPerformed(evt);
@@ -208,21 +237,21 @@ public class Apl_laundry extends javax.swing.JFrame {
         });
         getContentPane().add(ttotalbayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 160, -1));
 
-        bcancel.setText("Cancel");
+        bcancel.setText("Batal");
         bcancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bcancelActionPerformed(evt);
             }
         });
-        getContentPane().add(bcancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, -1));
+        getContentPane().add(bcancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 70, -1));
 
-        bexit.setText("Exit");
+        bexit.setText("Keluar");
         bexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bexitActionPerformed(evt);
             }
         });
-        getContentPane().add(bexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, -1, -1));
+        getContentPane().add(bexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 70, -1));
 
         tnotlp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,14 +259,6 @@ public class Apl_laundry extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tnotlp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 160, -1));
-
-        bview.setText("View (Refresh Table)");
-        bview.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bviewActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bview, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 160, -1));
 
         bsimpan.setText("Simpan");
         bsimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -255,7 +276,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         });
         getContentPane().add(bupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
 
-        bdelete.setText("Delete");
+        bdelete.setText("Hapus");
         bdelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bdeleteActionPerformed(evt);
@@ -337,7 +358,23 @@ public class Apl_laundry extends javax.swing.JFrame {
                 cbhargaActionPerformed(evt);
             }
         });
-        getContentPane().add(cbharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, -1, -1));
+        getContentPane().add(cbharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 160, -1));
+
+        btambah.setText("Tambah");
+        btambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btambahActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, -1, -1));
+
+        bedit.setText("Edit");
+        bedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 50, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -381,40 +418,12 @@ public class Apl_laundry extends javax.swing.JFrame {
             st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "SUKSES TERSIMPAN");
             kosong();
-            bviewActionPerformed(evt);
+            tabel();
+            bcancelActionPerformed(evt);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "GAGAL MENYIMPAN\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "LENGKAPI DATA\n" + e.getMessage());
         }
     }//GEN-LAST:event_bsimpanActionPerformed
-
-    private void bviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bviewActionPerformed
-        // TODO add your handling code here:
-        dtm = new DefaultTableModel();
-        dtm.addColumn("NO");
-        dtm.addColumn("TANGGAL");
-        dtm.addColumn("KODE PELANGGAN");
-        dtm.addColumn("NAMA PELANGGAN");
-        dtm.addColumn("NO TELP");
-        dtm.addColumn("ALAMAT PELANGGAN");
-        dtm.addColumn("BERAT PAKAIAN");
-        dtm.addColumn("HARGA");
-        dtm.addColumn("TOTAL BAYAR");
-
-        try {
-            int no = 1;
-            sql = "select * from laundry";
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                dtm.addRow(new Object[]{no++, rs.getString("Tanggal"), rs.getString("Kode_pelanggan"),
-                    rs.getString("Nama_pelanggan"), rs.getString("No_telp"), rs.getString("Alamat"),
-                    rs.getString("Berat_Pakaian"), rs.getString("Harga"), rs.getString("Total_bayar")});
-            }
-            tabeldata.setModel(dtm);
-        } catch (SQLException e) {
-            System.out.println("error :" + e.getMessage());
-        }
-    }//GEN-LAST:event_bviewActionPerformed
 
     private void tabeldataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeldataMouseClicked
         // TODO add your handling code here:
@@ -440,7 +449,7 @@ public class Apl_laundry extends javax.swing.JFrame {
                 PreparedStatement edit = con.prepareStatement(sql);
                 edit.execute();
                 JOptionPane.showMessageDialog(null, "UPDATE DATA BERHASIL");
-                bviewActionPerformed(evt);
+                tabel();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "GAGAL DIUPDATE" + e.getMessage());
             }
@@ -456,7 +465,7 @@ public class Apl_laundry extends javax.swing.JFrame {
                 PreparedStatement st = con.prepareStatement(sql);
                 st.executeUpdate();
                 JOptionPane.showMessageDialog(null, "HAPUS DATA SUKSES");
-                bviewActionPerformed(evt);
+                tabel();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "GAGAL DIHAPUS\n" + e.getMessage());
             }
@@ -477,11 +486,15 @@ public class Apl_laundry extends javax.swing.JFrame {
     private void bcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcancelActionPerformed
         // TODO add your handling code here:
         kosong();
+        nonAktif();
+        btambah.setEnabled(true);
+        bedit.setEnabled(true);
     }//GEN-LAST:event_bcancelActionPerformed
 
     private void breconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breconnectActionPerformed
         // TODO add your handling code here:
         koneksi();
+        tabel();
     }//GEN-LAST:event_breconnectActionPerformed
 
     private void cbhargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbhargaActionPerformed
@@ -509,9 +522,7 @@ public class Apl_laundry extends javax.swing.JFrame {
 
     private void tberatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tberatKeyReleased
         // TODO add your handling code here:
-        String isi = tberat.getText();
-
-        if (isi.equals("")) {
+        if (tberat.getText().equals("")) {
             ttotalbayar.setText("");
         } else {
             hitung();
@@ -521,6 +532,25 @@ public class Apl_laundry extends javax.swing.JFrame {
     private void ttotalbayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalbayarKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_ttotalbayarKeyReleased
+
+    private void btambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btambahActionPerformed
+        // TODO add your handling code here:
+        kosong();
+        aktif();
+        btambah.setEnabled(false);
+        bedit.setEnabled(false);
+    }//GEN-LAST:event_btambahActionPerformed
+
+    private void beditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beditActionPerformed
+        // TODO add your handling code here:
+        aktif();
+        bupdate.setEnabled(true);
+        bdelete.setEnabled(true);
+
+        btambah.setEnabled(false);
+        bedit.setEnabled(false);
+        bsimpan.setEnabled(false);
+    }//GEN-LAST:event_beditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -561,11 +591,12 @@ public class Apl_laundry extends javax.swing.JFrame {
     private javax.swing.JLabel Lbstatus;
     private javax.swing.JButton bcancel;
     private javax.swing.JButton bdelete;
+    private javax.swing.JButton bedit;
     private javax.swing.JButton bexit;
     private javax.swing.JButton breconnect;
     private javax.swing.JButton bsimpan;
+    private javax.swing.JButton btambah;
     private javax.swing.JButton bupdate;
-    private javax.swing.JButton bview;
     private javax.swing.JComboBox<String> cbharga;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
