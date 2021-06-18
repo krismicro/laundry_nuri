@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  * Tesssssar
  *
- * @author micro
+ * @author Krisno micro
  */
 public class Apl_laundry extends javax.swing.JFrame {
 
