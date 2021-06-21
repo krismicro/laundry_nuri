@@ -53,6 +53,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         bupdate.setEnabled(false);
         bdelete.setEnabled(false);
         cbharga.setEnabled(false);
+        bedit.setEnabled(false);
 
         tkodepel.setEnabled(false);
         talamat.setEnabled(false);
@@ -250,7 +251,7 @@ public class Apl_laundry extends javax.swing.JFrame {
                 bexitActionPerformed(evt);
             }
         });
-        getContentPane().add(bexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 70, -1));
+        getContentPane().add(bexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, 70, -1));
 
         tnotlp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -434,6 +435,8 @@ public class Apl_laundry extends javax.swing.JFrame {
         tberat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 6).toString());
         tharga.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 7).toString());
         ttotalbayar.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 8).toString());
+        
+        bedit.setEnabled(true);
     }//GEN-LAST:event_tabeldataMouseClicked
 
     private void bupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bupdateActionPerformed
@@ -487,7 +490,6 @@ public class Apl_laundry extends javax.swing.JFrame {
         kosong();
         nonAktif();
         btambah.setEnabled(true);
-        bedit.setEnabled(true);
     }//GEN-LAST:event_bcancelActionPerformed
 
     private void breconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breconnectActionPerformed
