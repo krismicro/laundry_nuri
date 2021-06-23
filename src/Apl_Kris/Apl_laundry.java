@@ -17,34 +17,33 @@ import javax.swing.table.DefaultTableModel;
  * @author Krisno micro
  */
 public class Apl_laundry extends javax.swing.JFrame {
-
+    Koneksi kon = new Koneksi();
+    
     private String sql;
-    private Connection con;
-    private Statement st;
-    private ResultSet rs;
     private DefaultTableModel dtm;
     public int harga;
     public float berat, totalbyr;
+
+    
 
     /**
      * Creates new form Apl_laundry
      */
     public Apl_laundry() {
         initComponents();
-        koneksi();
+        kon.koneksi();
+        status();
         tgl();
         tabel();
         nonAktif();
     }
 
-    public void koneksi() {
+    private void status() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/laundrykris", "root", "");
+            kon.koneksi();
             Lbstatus.setText("***DATABASE TERKONEKSI***");
         } catch (Exception e) {
             Lbstatus.setText("DATABASE TIDAK TERKONEKSI");
-            JOptionPane.showMessageDialog(null, "DATABASE TIDAK TERKONEKSI");
         }
     }
 
@@ -100,12 +99,12 @@ public class Apl_laundry extends javax.swing.JFrame {
         try {
             int no = 1;
             sql = "select * from laundry";
-            st = con.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                dtm.addRow(new Object[]{no++, rs.getString("Tanggal"), rs.getString("Kode_pelanggan"),
-                    rs.getString("Nama_pelanggan"), rs.getString("No_telp"), rs.getString("Alamat"),
-                    rs.getString("Berat_Pakaian"), rs.getString("Harga"), rs.getString("Total_bayar")});
+            kon.st = kon.con.createStatement();
+            kon.rs = kon.st.executeQuery(sql);
+            while (kon.rs.next()) {
+                dtm.addRow(new Object[]{no++, kon.rs.getString("Tanggal"), kon.rs.getString("Kode_pelanggan"),
+                    kon.rs.getString("Nama_pelanggan"), kon.rs.getString("No_telp"), kon.rs.getString("Alamat"),
+                    kon.rs.getString("Berat_Pakaian"), kon.rs.getString("Harga"), kon.rs.getString("Total_bayar")});
             }
             tabeldata.setModel(dtm);
         } catch (Exception e) {
@@ -329,10 +328,10 @@ public class Apl_laundry extends javax.swing.JFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 120, -1));
 
         jLabel9.setText("Status Koneksi :");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 100, -1));
 
         Lbstatus.setText("status");
-        getContentPane().add(Lbstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 230, -1));
+        getContentPane().add(Lbstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, 230, -1));
 
         talamat.setColumns(20);
         talamat.setRows(5);
@@ -346,7 +345,7 @@ public class Apl_laundry extends javax.swing.JFrame {
                 breconnectActionPerformed(evt);
             }
         });
-        getContentPane().add(breconnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 100, 20));
+        getContentPane().add(breconnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 590, 100, 20));
 
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
         jLabel10.setText("KRIS LAUNDRY");
@@ -414,8 +413,8 @@ public class Apl_laundry extends javax.swing.JFrame {
                     + "'" + tkodepel.getText() + "','" + tnamapel.getText() + "',"
                     + "'" + tnotlp.getText() + "','" + talamat.getText() + "',"
                     + "'" + tberat.getText() + "','" + tharga.getText() + "','" + ttotalbayar.getText() + "')";
-            st = con.createStatement();
-            st.executeUpdate(sql);
+            kon.st = kon.con.createStatement();
+            kon.st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "SUKSES TERSIMPAN");
             kosong();
             tabel();
@@ -435,7 +434,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         tberat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 6).toString());
         tharga.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 7).toString());
         ttotalbayar.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 8).toString());
-        
+
         bedit.setEnabled(true);
     }//GEN-LAST:event_tabeldataMouseClicked
 
@@ -448,7 +447,7 @@ public class Apl_laundry extends javax.swing.JFrame {
                         + "Nama_pelanggan='" + tnamapel.getText() + "', No_telp='" + tnotlp.getText() + "', Alamat='" + talamat.getText() + "', "
                         + "Berat_Pakaian='" + tberat.getText() + "', Harga='" + tharga.getText() + "', "
                         + "Total_bayar='" + ttotalbayar.getText() + "' where Kode_pelanggan='" + tkodepel.getText() + "'";
-                PreparedStatement edit = con.prepareStatement(sql);
+                PreparedStatement edit = kon.con.prepareStatement(sql);
                 edit.execute();
                 JOptionPane.showMessageDialog(null, "UPDATE DATA BERHASIL");
                 tabel();
@@ -464,7 +463,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         if (ok == JOptionPane.YES_OPTION) {
             try {
                 sql = "delete from laundry where Kode_pelanggan='" + tkodepel.getText() + "'";
-                PreparedStatement st = con.prepareStatement(sql);
+                PreparedStatement st = kon.con.prepareStatement(sql);
                 st.executeUpdate();
                 JOptionPane.showMessageDialog(null, "HAPUS DATA SUKSES");
                 tabel();
@@ -494,7 +493,7 @@ public class Apl_laundry extends javax.swing.JFrame {
 
     private void breconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breconnectActionPerformed
         // TODO add your handling code here:
-        koneksi();
+        kon.koneksi();
         tabel();
     }//GEN-LAST:event_breconnectActionPerformed
 
