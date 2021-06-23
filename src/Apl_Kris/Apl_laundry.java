@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  * Tesssssar
  *
- * @author Krisno micro
+ * @author Krisno
  */
 public class Apl_laundry extends javax.swing.JFrame {
     Koneksi kon = new Koneksi();
