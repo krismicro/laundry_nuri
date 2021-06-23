@@ -5,6 +5,7 @@
  */
 package Apl_Kris;
 
+import com.sun.tools.javac.parser.Tokens;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
@@ -17,6 +18,8 @@ public class Login extends javax.swing.JFrame {
     Koneksi kon = new Koneksi();
 
     private String sql;
+
+    public static String uName;
 
     /**
      * Creates new form Login
@@ -39,7 +42,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tusername = new javax.swing.JTextField();
         tpassword = new javax.swing.JPasswordField();
-        bbatal = new javax.swing.JButton();
+        bkeluar = new javax.swing.JButton();
         blogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,10 +51,21 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        bbatal.setText("Keluar");
-        bbatal.addActionListener(new java.awt.event.ActionListener() {
+        tusername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bbatalActionPerformed(evt);
+                tusernameActionPerformed(evt);
+            }
+        });
+        tusername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tusernameKeyReleased(evt);
+            }
+        });
+
+        bkeluar.setText("Keluar");
+        bkeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bkeluarActionPerformed(evt);
             }
         });
 
@@ -66,9 +80,14 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(blogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(bkeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -76,12 +95,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tusername)
-                            .addComponent(tpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(blogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(bbatal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
@@ -97,7 +111,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(tpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bbatal)
+                    .addComponent(bkeluar)
                     .addComponent(blogin))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
@@ -108,13 +122,14 @@ public class Login extends javax.swing.JFrame {
     private void bloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloginActionPerformed
         // TODO add your handling code here:
         try {
+            uName = tusername.getText();
             sql = "SELECT * FROM data_pegawai WHERE Username='" + tusername.getText() + "' AND Password='" + tpassword.getText() + "'";
             kon.st = kon.con.createStatement();
             kon.rs = kon.st.executeQuery(sql);
             if (kon.rs.next()) {
                 if (tusername.getText().equals(kon.rs.getString("Username")) && tpassword.getText().equals(kon.rs.getString("Password"))) {
                     JOptionPane.showMessageDialog(null, "berhasil login");
-                    Apl_laundry menu = new Apl_laundry(); //Menu belum dibuat (wip)
+                    Menu_utama menu = new Menu_utama();
                     menu.setVisible(true);
                     this.dispose();
                 }
@@ -124,13 +139,21 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-
     }//GEN-LAST:event_bloginActionPerformed
 
-    private void bbatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbatalActionPerformed
+    private void bkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkeluarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_bbatalActionPerformed
+    }//GEN-LAST:event_bkeluarActionPerformed
+
+
+    private void tusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tusernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tusernameActionPerformed
+
+    private void tusernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tusernameKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tusernameKeyReleased
 
     /**
      * @param args the command line arguments
@@ -176,7 +199,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bbatal;
+    private javax.swing.JButton bkeluar;
     private javax.swing.JButton blogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
