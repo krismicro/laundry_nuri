@@ -5,9 +5,7 @@
  */
 package Apl_Kris;
 
-import com.sun.tools.javac.parser.Tokens;
 import javax.swing.JOptionPane;
-import java.sql.*;
 
 /**
  *
@@ -19,7 +17,7 @@ public class Login extends javax.swing.JFrame {
 
     private String sql;
 
-    public static String uName;
+    private static String uName;
 
     /**
      * Creates new form Login
@@ -27,6 +25,10 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         kon.koneksi();
+    }
+    
+    public String getuName(){
+        return this.uName;
     }
 
     /**

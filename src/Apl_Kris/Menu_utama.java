@@ -22,7 +22,7 @@ public class Menu_utama extends javax.swing.JFrame {
     public Menu_utama() {
         initComponents();
         kon.koneksi();
-        twelcome.setText("Selamat Datang "+log.uName);
+        twelcome.setText("Selamat Datang "+log.getuName());
         
 //        String smbil = log.ambil();
 //        System.out.println(log.ambil(uName));
@@ -49,7 +49,7 @@ public class Menu_utama extends javax.swing.JFrame {
 
         twelcome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         twelcome.setText("welcome");
-        getContentPane().add(twelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 87, 184, -1));
+        getContentPane().add(twelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 184, -1));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);

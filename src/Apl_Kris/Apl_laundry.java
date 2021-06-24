@@ -17,14 +17,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Krisno
  */
 public class Apl_laundry extends javax.swing.JFrame {
+
     Koneksi kon = new Koneksi();
-    
+
     private String sql;
     private DefaultTableModel dtm;
-    public int harga;
-    public float berat, totalbyr;
-
-    
+    private int harga;
+    private float berat, totalbyr;
 
     /**
      * Creates new form Apl_laundry
@@ -84,7 +83,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         ttgl.setText(s.format(ys));
     }
 
-    public void tabel() {
+    private void tabel() {
         dtm = new DefaultTableModel();
         dtm.addColumn("NO");
         dtm.addColumn("TANGGAL");
@@ -112,7 +111,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         }
     }
 
-    public void hitung() {
+    private void hitung() {
         try {
 
             berat = Float.valueOf(tberat.getText());
@@ -125,7 +124,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         }
     }
 
-    public void kosong() {
+    private void kosong() {
         tberat.setText("");
         tharga.setText("");
         tnotlp.setText("");
