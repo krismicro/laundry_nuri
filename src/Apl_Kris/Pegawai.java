@@ -131,7 +131,7 @@ public class Pegawai extends javax.swing.JFrame {
         tpassword = new javax.swing.JTextField();
         tidbantu = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table.setModel(new javax.swing.table.DefaultTableModel(
