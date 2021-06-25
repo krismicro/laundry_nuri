@@ -22,8 +22,6 @@ public class Apl_laundry extends javax.swing.JFrame {
 
     private String sql;
     private DefaultTableModel dtm;
-    private int harga;
-    private float berat, totalbyr;
 
     /**
      * Creates new form Apl_laundry
@@ -92,7 +90,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         dtm.addColumn("NO TELP");
         dtm.addColumn("ALAMAT PELANGGAN");
         dtm.addColumn("BERAT PAKAIAN");
-        dtm.addColumn("HARGA");
+        dtm.addColumn("PAKET");
         dtm.addColumn("TOTAL BAYAR");
 
         try {
@@ -111,13 +109,50 @@ public class Apl_laundry extends javax.swing.JFrame {
         }
     }
 
+    //variabel
+    private int harga = 0, jaket = 0, seprai = 0, sepatu = 0;
+    private float berat = 0, totalbyr = 0;
+
+    private void hitungTambahan() {
+        if (cbJaket.isSelected()) {
+            jaket = 15000;
+        } else {
+            jaket = 0;
+        }
+        if (cbSeprai.isSelected()) {
+            seprai = 20000;
+        } else {
+            seprai = 0;
+        }
+        if (cbSepatu.isSelected()) {
+            sepatu = 10000;
+        } else {
+            sepatu = 0;
+        }
+        int tambahan = jaket + seprai + sepatu;
+        ttambahan.setText(String.valueOf(tambahan));
+        hitung();
+    }
+
     private void hitung() {
         try {
+            if (tberat.getText().equals("")) {
+                //ttotalbayar.setText("");
+                berat = 0;
+                tharga.setText("");
+            } else {
+                berat = Float.valueOf(tberat.getText());
+            }
+            if (tharga.getText().equals("")) {
+                //ttotalbayar.setText("");
+                harga = 0;
+            } else {
+                harga = Integer.parseInt(tharga.getText());
+            }
+//            berat = Float.valueOf(tberat.getText());
+//            harga = Integer.parseInt(tharga.getText());
 
-            berat = Float.valueOf(tberat.getText());
-            harga = Integer.parseInt(tharga.getText());
-            totalbyr = berat * harga;
-
+            totalbyr = (berat * harga) + (jaket + seprai + sepatu);
             ttotalbayar.setText(String.valueOf(totalbyr));
             tharga.setText(String.valueOf(harga));
         } catch (Exception e) {
@@ -147,14 +182,8 @@ public class Apl_laundry extends javax.swing.JFrame {
         ttgl = new javax.swing.JTextField();
         tnamapel = new javax.swing.JTextField();
         tberat = new javax.swing.JTextField();
-        tharga = new javax.swing.JTextField();
-        ttotalbayar = new javax.swing.JTextField();
-        bcancel = new javax.swing.JButton();
         bexit = new javax.swing.JButton();
         tnotlp = new javax.swing.JTextField();
-        bsimpan = new javax.swing.JButton();
-        bupdate = new javax.swing.JButton();
-        bdelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabeldata = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -162,20 +191,36 @@ public class Apl_laundry extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Lbstatus = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         talamat = new javax.swing.JTextArea();
         breconnect = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        icon = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cbharga = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        cbJaket = new javax.swing.JCheckBox();
+        cbSeprai = new javax.swing.JCheckBox();
+        cbSepatu = new javax.swing.JCheckBox();
         btambah = new javax.swing.JButton();
         bedit = new javax.swing.JButton();
+        bcancel = new javax.swing.JButton();
+        bdelete = new javax.swing.JButton();
+        bupdate = new javax.swing.JButton();
+        bsimpan = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        ttotalbayar = new javax.swing.JTextField();
+        ttambahan = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tharga = new javax.swing.JTextField();
+        cbharga = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tkodepel.addActionListener(new java.awt.event.ActionListener() {
@@ -214,42 +259,13 @@ public class Apl_laundry extends javax.swing.JFrame {
         });
         getContentPane().add(tberat, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 160, -1));
 
-        tharga.setEditable(false);
-        tharga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                thargaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(tharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 160, -1));
-
-        ttotalbayar.setEditable(false);
-        ttotalbayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ttotalbayarActionPerformed(evt);
-            }
-        });
-        ttotalbayar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                ttotalbayarKeyReleased(evt);
-            }
-        });
-        getContentPane().add(ttotalbayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 160, -1));
-
-        bcancel.setText("Batal");
-        bcancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bcancelActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bcancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 70, -1));
-
-        bexit.setText("Keluar");
+        bexit.setText("Tutup");
         bexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bexitActionPerformed(evt);
             }
         });
-        getContentPane().add(bexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, 70, -1));
+        getContentPane().add(bexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 70, -1));
 
         tnotlp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,30 +273,6 @@ public class Apl_laundry extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tnotlp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 160, -1));
-
-        bsimpan.setText("Simpan");
-        bsimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bsimpanActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bsimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
-
-        bupdate.setText("Update");
-        bupdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bupdateActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
-
-        bdelete.setText("Hapus");
-        bdelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bdeleteActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 300, -1, -1));
 
         tabeldata.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -317,15 +309,6 @@ public class Apl_laundry extends javax.swing.JFrame {
         jLabel5.setText("No Telp");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 120, -1));
 
-        jLabel6.setText("Berat Pakaian (kg)");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 140, -1));
-
-        jLabel7.setText("Harga /kg");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
-
-        jLabel8.setText("Total Bayar");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 120, -1));
-
         jLabel9.setText("Status Koneksi :");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 100, -1));
 
@@ -336,7 +319,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         talamat.setRows(5);
         jScrollPane2.setViewportView(talamat);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 250, 170, -1));
 
         breconnect.setText("Reconnect");
         breconnect.addActionListener(new java.awt.event.ActionListener() {
@@ -346,17 +329,72 @@ public class Apl_laundry extends javax.swing.JFrame {
         });
         getContentPane().add(breconnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 590, 100, 20));
 
-        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
-        jLabel10.setText("KRIS LAUNDRY");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setLayout(null);
 
-        cbharga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=PILIH HARGA=", "3 Hari (Rp 5000/kg)", "1 Hari (Rp 9000/kg)", "7 Jam (Rp 15000/kg)", " ", " " }));
-        cbharga.addActionListener(new java.awt.event.ActionListener() {
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Apl_Kris/washing-machine small.png"))); // NOI18N
+        jPanel1.add(icon);
+        icon.setBounds(260, 5, 70, 60);
+
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
+        jLabel10.setText("KRIS LAUNDRY KILOAN");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(330, 20, 290, 33);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 70));
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setLayout(null);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tambahan"));
+
+        cbJaket.setText("Jaket Rp15000");
+        cbJaket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbhargaActionPerformed(evt);
+                cbJaketActionPerformed(evt);
             }
         });
-        getContentPane().add(cbharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 160, -1));
+
+        cbSeprai.setText("Seprai Rp20000");
+        cbSeprai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSepraiActionPerformed(evt);
+            }
+        });
+
+        cbSepatu.setText("Sepatu Rp10000");
+        cbSepatu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSepatuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbSeprai)
+                    .addComponent(cbSepatu)
+                    .addComponent(cbJaket))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(cbJaket)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbSeprai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbSepatu)
+                .addContainerGap())
+        );
+
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(690, 90, 160, 106);
 
         btambah.setText("Tambah");
         btambah.addActionListener(new java.awt.event.ActionListener() {
@@ -364,7 +402,8 @@ public class Apl_laundry extends javax.swing.JFrame {
                 btambahActionPerformed(evt);
             }
         });
-        getContentPane().add(btambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, -1, -1));
+        jPanel2.add(btambah);
+        btambah.setBounds(350, 200, 73, 22);
 
         bedit.setText("Edit");
         bedit.addActionListener(new java.awt.event.ActionListener() {
@@ -372,9 +411,110 @@ public class Apl_laundry extends javax.swing.JFrame {
                 beditActionPerformed(evt);
             }
         });
-        getContentPane().add(bedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 50, -1));
+        jPanel2.add(bedit);
+        bedit.setBounds(440, 200, 70, 22);
 
-        pack();
+        bcancel.setText("Batal");
+        bcancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcancelActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bcancel);
+        bcancel.setBounds(530, 200, 70, 22);
+
+        bdelete.setText("Hapus");
+        bdelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bdeleteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bdelete);
+        bdelete.setBounds(530, 240, 72, 22);
+
+        bupdate.setText("Update");
+        bupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bupdateActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bupdate);
+        bupdate.setBounds(440, 240, 72, 22);
+
+        bsimpan.setText("Simpan");
+        bsimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bsimpanActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bsimpan);
+        bsimpan.setBounds(350, 240, 72, 22);
+
+        jLabel8.setText("Total Bayar");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(360, 130, 120, 16);
+
+        ttotalbayar.setEditable(false);
+        ttotalbayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ttotalbayarActionPerformed(evt);
+            }
+        });
+        ttotalbayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ttotalbayarKeyReleased(evt);
+            }
+        });
+        jPanel2.add(ttotalbayar);
+        ttotalbayar.setBounds(500, 120, 160, 22);
+
+        ttambahan.setEditable(false);
+        ttambahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ttambahanActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ttambahan);
+        ttambahan.setBounds(500, 86, 160, 22);
+
+        jLabel11.setText("Tambahan");
+        jPanel2.add(jLabel11);
+        jLabel11.setBounds(360, 89, 130, 16);
+
+        jLabel7.setText("Paket");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(360, 55, 120, 16);
+
+        jLabel6.setText("Berat Pakaian (kg)");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(360, 18, 140, 16);
+
+        tharga.setEditable(false);
+        tharga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thargaActionPerformed(evt);
+            }
+        });
+        tharga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                thargaKeyReleased(evt);
+            }
+        });
+        jPanel2.add(tharga);
+        tharga.setBounds(500, 52, 160, 22);
+
+        cbharga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=PILIH PAKET=", "3 Hari (Rp 5000/kg)", "1 Hari (Rp 9000/kg)", "7 Jam (Rp 15000/kg)" }));
+        cbharga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbhargaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cbharga);
+        cbharga.setBounds(691, 52, 160, 22);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 880, 580));
+
+        setBounds(0, 0, 896, 655);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tkodepelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tkodepelActionPerformed
@@ -405,6 +545,70 @@ public class Apl_laundry extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tnotlpActionPerformed
 
+    private void tabeldataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeldataMouseClicked
+        // TODO add your handling code here:
+        ttgl.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 1).toString());
+        tkodepel.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 2).toString());
+        tnamapel.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 3).toString());
+        tnotlp.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 4).toString());
+        talamat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 5).toString());
+        tberat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 6).toString());
+        tharga.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 7).toString());
+        ttotalbayar.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 8).toString());
+
+        bedit.setEnabled(true);
+    }//GEN-LAST:event_tabeldataMouseClicked
+
+    private void bexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bexitActionPerformed
+        // TODO add your handling code here:
+        int ok = JOptionPane.showConfirmDialog(null, "Yakin Keluar?", "keluar", JOptionPane.YES_NO_OPTION);
+        if (ok == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+
+    }//GEN-LAST:event_bexitActionPerformed
+
+    private void breconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breconnectActionPerformed
+        // TODO add your handling code here:
+        kon.koneksi();
+        tabel();
+    }//GEN-LAST:event_breconnectActionPerformed
+
+    private void cbhargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbhargaActionPerformed
+        // TODO add your handling code here:
+        String pil = cbharga.getSelectedItem().toString();
+
+        if (pil.equals("3 Hari (Rp 5000/kg)")) {
+            tharga.setText("5000");
+        } else if (pil.equals("1 Hari (Rp 9000/kg)")) {
+            tharga.setText("9000");
+        } else if (pil.equals("7 Jam (Rp 15000/kg)")) {
+            tharga.setText("15000");
+        } else {
+            tharga.setText("");
+        }
+
+        hitung();
+    }//GEN-LAST:event_cbhargaActionPerformed
+
+    private void tberatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tberatKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tberatKeyTyped
+
+    private void tberatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tberatKeyReleased
+        // TODO add your handling code here:
+//        if (tberat.getText().equals("")) {
+//            //ttotalbayar.setText("");
+//            berat = 0;
+//        } else {
+            hitung();
+//        }
+    }//GEN-LAST:event_tberatKeyReleased
+
+    private void ttotalbayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalbayarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ttotalbayarKeyReleased
+
     private void bsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsimpanActionPerformed
         // TODO add your handling code here:
         try {
@@ -422,20 +626,6 @@ public class Apl_laundry extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "LENGKAPI DATA\n" + e.getMessage());
         }
     }//GEN-LAST:event_bsimpanActionPerformed
-
-    private void tabeldataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeldataMouseClicked
-        // TODO add your handling code here:
-        ttgl.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 1).toString());
-        tkodepel.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 2).toString());
-        tnamapel.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 3).toString());
-        tnotlp.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 4).toString());
-        talamat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 5).toString());
-        tberat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 6).toString());
-        tharga.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 7).toString());
-        ttotalbayar.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 8).toString());
-
-        bedit.setEnabled(true);
-    }//GEN-LAST:event_tabeldataMouseClicked
 
     private void bupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bupdateActionPerformed
         // TODO add your handling code here:
@@ -474,71 +664,12 @@ public class Apl_laundry extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bdeleteActionPerformed
 
-    private void bexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bexitActionPerformed
-        // TODO add your handling code here:
-        int ok = JOptionPane.showConfirmDialog(null, "Yakin Keluar?", "keluar", JOptionPane.YES_NO_OPTION);
-        if (ok == JOptionPane.YES_OPTION) {
-            dispose();
-        }
-
-    }//GEN-LAST:event_bexitActionPerformed
-
     private void bcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcancelActionPerformed
         // TODO add your handling code here:
         kosong();
         nonAktif();
         btambah.setEnabled(true);
     }//GEN-LAST:event_bcancelActionPerformed
-
-    private void breconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breconnectActionPerformed
-        // TODO add your handling code here:
-        kon.koneksi();
-        tabel();
-    }//GEN-LAST:event_breconnectActionPerformed
-
-    private void cbhargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbhargaActionPerformed
-        // TODO add your handling code here:
-        String pil = cbharga.getSelectedItem().toString();
-
-        if (pil.equals("3 Hari (Rp 5000/kg)")) {
-            tharga.setText("5000");
-        } else if (pil.equals("3 Hari (Rp 5000/kg)")) {
-            tharga.setText("5000");
-        } else if (pil.equals("1 Hari (Rp 9000/kg)")) {
-            tharga.setText("9000");
-        } else if (pil.equals("7 Jam (Rp 15000/kg)")) {
-            tharga.setText("15000");
-        } else {
-            tharga.setText("");
-        }
-
-        hitung();
-    }//GEN-LAST:event_cbhargaActionPerformed
-
-    private void tberatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tberatKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tberatKeyTyped
-
-    private void tberatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tberatKeyReleased
-        // TODO add your handling code here:
-        if (tberat.getText().equals("")) {
-            ttotalbayar.setText("");
-        } else {
-            hitung();
-        }
-    }//GEN-LAST:event_tberatKeyReleased
-
-    private void ttotalbayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalbayarKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ttotalbayarKeyReleased
-
-    private void btambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btambahActionPerformed
-        // TODO add your handling code here:
-        kosong();
-        aktif();
-        btambah.setEnabled(false);
-        bedit.setEnabled(false);
-    }//GEN-LAST:event_btambahActionPerformed
 
     private void beditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beditActionPerformed
         // TODO add your handling code here:
@@ -550,6 +681,43 @@ public class Apl_laundry extends javax.swing.JFrame {
         bedit.setEnabled(false);
         bsimpan.setEnabled(false);
     }//GEN-LAST:event_beditActionPerformed
+
+    private void btambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btambahActionPerformed
+        // TODO add your handling code here:
+        kosong();
+        aktif();
+        btambah.setEnabled(false);
+        bedit.setEnabled(false);
+    }//GEN-LAST:event_btambahActionPerformed
+
+    private void cbSepatuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSepatuActionPerformed
+        // TODO add your handling code here:
+        hitungTambahan();
+    }//GEN-LAST:event_cbSepatuActionPerformed
+
+    private void cbJaketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbJaketActionPerformed
+        // TODO add your handling code here:
+        hitungTambahan();
+    }//GEN-LAST:event_cbJaketActionPerformed
+
+    private void ttambahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ttambahanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ttambahanActionPerformed
+
+    private void cbSepraiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSepraiActionPerformed
+        // TODO add your handling code here:
+        hitungTambahan();
+    }//GEN-LAST:event_cbSepraiActionPerformed
+
+    private void thargaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thargaKeyReleased
+        // TODO add your handling code here:
+//        if (tharga.getText().equals("")) {
+//            //ttotalbayar.setText("");
+//            harga = 0;
+//        } else {
+//            hitung();
+//        }
+    }//GEN-LAST:event_thargaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -596,9 +764,14 @@ public class Apl_laundry extends javax.swing.JFrame {
     private javax.swing.JButton bsimpan;
     private javax.swing.JButton btambah;
     private javax.swing.JButton bupdate;
+    private javax.swing.JCheckBox cbJaket;
+    private javax.swing.JCheckBox cbSepatu;
+    private javax.swing.JCheckBox cbSeprai;
     private javax.swing.JComboBox<String> cbharga;
+    private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -607,6 +780,9 @@ public class Apl_laundry extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabeldata;
@@ -616,6 +792,7 @@ public class Apl_laundry extends javax.swing.JFrame {
     private javax.swing.JTextField tkodepel;
     private javax.swing.JTextField tnamapel;
     private javax.swing.JTextField tnotlp;
+    private javax.swing.JTextField ttambahan;
     private javax.swing.JTextField ttgl;
     private javax.swing.JTextField ttotalbayar;
     // End of variables declaration//GEN-END:variables

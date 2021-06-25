@@ -22,7 +22,7 @@ public class Menu_utama extends javax.swing.JFrame {
     public Menu_utama() {
         initComponents();
         kon.koneksi();
-        twelcome.setText("Selamat Datang "+log.getuName());
+        twelcome.setText("Selamat Datang "+log.getuName()+" di Program Laundry Java");
         
 //        String smbil = log.ambil();
 //        System.out.println(log.ambil(uName));
@@ -39,28 +39,114 @@ public class Menu_utama extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         twelcome = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnLogout = new javax.swing.JMenuItem();
+        mnKeluar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        twelcome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(51, 255, 255));
+        jPanel1.setLayout(null);
+
+        twelcome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        twelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         twelcome.setText("welcome");
-        getContentPane().add(twelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 184, -1));
+        jPanel1.add(twelcome);
+        twelcome.setBounds(0, 70, 390, 25);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 390, 240));
 
         jMenu1.setText("File");
+
+        mnLogout.setText("Logout");
+        mnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnLogoutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnLogout);
+
+        mnKeluar.setText("Keluar");
+        mnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnKeluarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnKeluar);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Transaksi");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Pegawai");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setBounds(0, 0, 404, 251);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLogoutActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+        
+    }//GEN-LAST:event_mnLogoutActionPerformed
+
+    private void mnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnKeluarActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_mnKeluarActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        Apl_laundry laundry = new Apl_laundry();
+        laundry.setVisible(true);
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+        Pegawai pegawai = new Pegawai();
+        pegawai.setVisible(true);
+    }//GEN-LAST:event_jMenu3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -100,7 +186,11 @@ public class Menu_utama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem mnKeluar;
+    private javax.swing.JMenuItem mnLogout;
     private javax.swing.JLabel twelcome;
     // End of variables declaration//GEN-END:variables
 }

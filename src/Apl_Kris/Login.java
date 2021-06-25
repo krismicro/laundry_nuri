@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
 
     private void bkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkeluarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_bkeluarActionPerformed
 
 

@@ -27,6 +27,8 @@ public class Pegawai extends javax.swing.JFrame {
         initComponents();
         kon.koneksi();
         table();
+        
+        tidbantu.setVisible(false);
     }
 
     private void autoId() {
