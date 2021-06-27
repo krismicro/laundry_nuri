@@ -73,11 +73,11 @@ public class ComboCheckBox extends javax.swing.JFrame {
 
     private void isiNamaPelanggan() {
         try {
-            sql = "select * from laundry";
+            sql = "select * from paket";
             kon.st = kon.con.createStatement();
             kon.rs = kon.st.executeQuery(sql);
             while (kon.rs.next()) {
-                cbNamaPelanggan.addItem(kon.rs.getString("Nama_pelanggan"));
+                cbNamaPelanggan.addItem(kon.rs.getString("Nama_paket"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -86,10 +86,10 @@ public class ComboCheckBox extends javax.swing.JFrame {
     private void cbNamaPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamaPelangganActionPerformed
         // TODO add your handling code here:
         try {
-        String sql = "Select * from laundry where Nama_pelanggan='"+cbNamaPelanggan.getSelectedItem()+"'";
+        String sql = "Select * from paket where Nama_paket='"+cbNamaPelanggan.getSelectedItem()+"'";
         kon.rs = kon.st.executeQuery(sql);
         if (kon.rs.next()){
-            tidPelanggan.setText(kon.rs.getString("Kode_pelanggan"));
+            tidPelanggan.setText(kon.rs.getString("Id_paket"));
         }
         }catch (SQLException e){
             

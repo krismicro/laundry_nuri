@@ -286,7 +286,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel3">
+        <Container class="javax.swing.JPanel" name="panelTambahan">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -509,11 +509,8 @@
         <Component class="javax.swing.JComboBox" name="cbharga">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="1">
                 <StringItem index="0" value="=PILIH PAKET="/>
-                <StringItem index="1" value="3 Hari (Rp 5000/kg)"/>
-                <StringItem index="2" value="1 Hari (Rp 9000/kg)"/>
-                <StringItem index="3" value="7 Jam (Rp 15000/kg)"/>
               </StringArray>
             </Property>
           </Properties>

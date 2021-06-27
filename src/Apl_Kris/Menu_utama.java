@@ -46,6 +46,8 @@ public class Menu_utama extends javax.swing.JFrame {
         mnLogout = new javax.swing.JMenuItem();
         mnKeluar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -95,6 +97,23 @@ public class Menu_utama extends javax.swing.JFrame {
                 jMenu2ActionPerformed(evt);
             }
         });
+
+        jMenuItem1.setText("Buat Transaksi");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Data Paket");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Pegawai");
@@ -118,8 +137,8 @@ public class Menu_utama extends javax.swing.JFrame {
     private void mnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLogoutActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Login login = new Login();
-        login.setVisible(true);
+        Login x = new Login();
+        x.setVisible(true);
         
     }//GEN-LAST:event_mnLogoutActionPerformed
 
@@ -138,15 +157,26 @@ public class Menu_utama extends javax.swing.JFrame {
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
-        Apl_laundry laundry = new Apl_laundry();
-        laundry.setVisible(true);
+        
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
-        Pegawai pegawai = new Pegawai();
-        pegawai.setVisible(true);
+        Pegawai x = new Pegawai();
+        x.setVisible(true);
     }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Apl_laundry x = new Apl_laundry();
+        x.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        Paket x = new Paket();
+        x.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +218,8 @@ public class Menu_utama extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mnKeluar;
     private javax.swing.JMenuItem mnLogout;

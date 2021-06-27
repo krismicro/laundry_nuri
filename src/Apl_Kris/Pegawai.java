@@ -47,7 +47,7 @@ public class Pegawai extends javax.swing.JFrame {
     private void aktif() {
         bsimpan.setEnabled(true);
 
-        tidUser.setEnabled(true);
+//        tidUser.setEnabled(true);
         tuserName.setEnabled(true);
         tpassword.setEnabled(true);
     }
@@ -190,6 +190,8 @@ public class Pegawai extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, 125));
 
+        tidUser.setEditable(false);
+        tidUser.setEnabled(false);
         tidUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tidUserActionPerformed(evt);

@@ -33,6 +33,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         tgl();
         tabel();
         nonAktif();
+        isiNamaPaket();
         tidbantu.setVisible(false);
     }
 
@@ -51,6 +52,16 @@ public class Apl_laundry extends javax.swing.JFrame {
         bdelete.setEnabled(false);
         cbharga.setEnabled(false);
         bedit.setEnabled(false);
+        
+        panelTambahan.setEnabled(false);
+        cbJaket.setEnabled(false);
+        cbSeprai.setEnabled(false);
+        cbSepatu.setEnabled(false);
+        cbJaket.setSelected(false);
+        cbSeprai.setSelected(false);
+        cbSepatu.setSelected(false);
+        
+        
 
         tkodepel.setEnabled(false);
         talamat.setEnabled(false);
@@ -65,6 +76,11 @@ public class Apl_laundry extends javax.swing.JFrame {
     private void aktif() {
         bsimpan.setEnabled(true);
         cbharga.setEnabled(true);
+        
+        panelTambahan.setEnabled(true);
+        cbJaket.setEnabled(true);
+        cbSeprai.setEnabled(true);
+        cbSepatu.setEnabled(true);
 
 //        tkodepel.setEnabled(true);
         talamat.setEnabled(true);
@@ -111,16 +127,30 @@ public class Apl_laundry extends javax.swing.JFrame {
         }
     }
 
+    private void isiNamaPaket() {
+        try {
+            sql = "select * from paket";
+            kon.st = kon.con.createStatement();
+            kon.rs = kon.st.executeQuery(sql);
+            while (kon.rs.next()) {
+                cbharga.addItem(kon.rs.getString("Nama_paket"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     private void tabel() {
         dtm = new DefaultTableModel();
         dtm.addColumn("No");
         dtm.addColumn("TANGGAL");
-        dtm.addColumn("KODE PELANGGAN");
-        dtm.addColumn("NAMA PELANGGAN");
+        dtm.addColumn("KODE TRANSAKSI");
+        dtm.addColumn("NAMA");
         dtm.addColumn("No TELP");
-        dtm.addColumn("ALAMAT PELANGGAN");
-        dtm.addColumn("BERAT PAKAIAN");
+        dtm.addColumn("ALAMAT");
+        dtm.addColumn("BERAT (kg)");
         dtm.addColumn("PAKET");
+        dtm.addColumn("TAMBAHAN");
         dtm.addColumn("TOTAL BAYAR");
 
         try {
@@ -131,7 +161,7 @@ public class Apl_laundry extends javax.swing.JFrame {
             while (kon.rs.next()) {
                 dtm.addRow(new Object[]{no++, kon.rs.getString("Tanggal"), kon.rs.getString("Kode_pelanggan"),
                     kon.rs.getString("Nama_pelanggan"), kon.rs.getString("No_telp"), kon.rs.getString("Alamat"),
-                    kon.rs.getString("Berat_Pakaian"), kon.rs.getString("Harga"), kon.rs.getString("Total_bayar")});
+                    kon.rs.getString("Berat_Pakaian"), kon.rs.getString("Harga"), kon.rs.getString("Tambahan"), kon.rs.getString("Total_bayar")});
             }
             tabeldata.setModel(dtm);
         } catch (Exception e) {
@@ -171,7 +201,7 @@ public class Apl_laundry extends javax.swing.JFrame {
             if (tberat.getText().equals("")) {
                 //ttotalbayar.setText("");
                 berat = 0;
-                tharga.setText("");
+//                tharga.setText("");
             } else {
                 berat = Float.valueOf(tberat.getText());
             }
@@ -196,6 +226,8 @@ public class Apl_laundry extends javax.swing.JFrame {
         tkodepel.setText("");
         tnamapel.setText("");
         talamat.setText("");
+        ttambahan.setText("");
+        
     }
 
     /**
@@ -229,7 +261,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         icon = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        panelTambahan = new javax.swing.JPanel();
         cbJaket = new javax.swing.JCheckBox();
         cbSeprai = new javax.swing.JCheckBox();
         cbSepatu = new javax.swing.JCheckBox();
@@ -351,7 +383,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setLayout(null);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tambahan"));
+        panelTambahan.setBorder(javax.swing.BorderFactory.createTitledBorder("Tambahan"));
 
         cbJaket.setText("Jaket Rp15000");
         cbJaket.addActionListener(new java.awt.event.ActionListener() {
@@ -374,21 +406,21 @@ public class Apl_laundry extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTambahanLayout = new javax.swing.GroupLayout(panelTambahan);
+        panelTambahan.setLayout(panelTambahanLayout);
+        panelTambahanLayout.setHorizontalGroup(
+            panelTambahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTambahanLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelTambahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbSeprai)
                     .addComponent(cbSepatu)
                     .addComponent(cbJaket))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panelTambahanLayout.setVerticalGroup(
+            panelTambahanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTambahanLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(cbJaket)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -398,8 +430,8 @@ public class Apl_laundry extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel3);
-        jPanel3.setBounds(690, 90, 160, 106);
+        jPanel2.add(panelTambahan);
+        panelTambahan.setBounds(690, 90, 160, 106);
 
         btambah.setText("Tambah");
         btambah.addActionListener(new java.awt.event.ActionListener() {
@@ -486,7 +518,7 @@ public class Apl_laundry extends javax.swing.JFrame {
         jPanel2.add(tharga);
         tharga.setBounds(500, 52, 160, 22);
 
-        cbharga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=PILIH PAKET=", "3 Hari (Rp 5000/kg)", "1 Hari (Rp 9000/kg)", "7 Jam (Rp 15000/kg)" }));
+        cbharga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=PILIH PAKET=" }));
         cbharga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbhargaActionPerformed(evt);
@@ -513,7 +545,8 @@ public class Apl_laundry extends javax.swing.JFrame {
         talamat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 5).toString());
         tberat.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 6).toString());
         tharga.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 7).toString());
-        ttotalbayar.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 8).toString());
+        ttambahan.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 8).toString());
+        ttotalbayar.setText(tabeldata.getValueAt(tabeldata.getSelectedRow(), 9).toString());
 
         bedit.setEnabled(true);
     }//GEN-LAST:event_tabeldataMouseClicked
@@ -533,20 +566,30 @@ public class Apl_laundry extends javax.swing.JFrame {
     }//GEN-LAST:event_breconnectActionPerformed
 
     private void cbhargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbhargaActionPerformed
-        // TODO add your handling code here:
-        String pil = cbharga.getSelectedItem().toString();
-
-        if (pil.equals("3 Hari (Rp 5000/kg)")) {
-            tharga.setText("5000");
-        } else if (pil.equals("1 Hari (Rp 9000/kg)")) {
-            tharga.setText("9000");
-        } else if (pil.equals("7 Jam (Rp 15000/kg)")) {
-            tharga.setText("15000");
-        } else {
-            tharga.setText("");
+        // TODO add your handling code here
+        try {
+        String sql = "Select * from paket where Nama_paket='"+cbharga.getSelectedItem()+"'";
+        kon.rs = kon.st.executeQuery(sql);
+        if (kon.rs.next()){
+            tharga.setText(kon.rs.getString("Harga_paket"));
         }
-
+        }catch (SQLException e){
+            
+        }
         hitung();
+        //<editor-fold defaultstate="collapsed" desc="if yang lama">
+//        String pil = cbharga.getSelectedItem().toString();
+//
+//        if (pil.equals("3 Hari (Rp 5000/kg)")) {
+//            tharga.setText("5000");
+//        } else if (pil.equals("1 Hari (Rp 9000/kg)")) {
+//            tharga.setText("9000");
+//        } else if (pil.equals("7 Jam (Rp 15000/kg)")) {
+//            tharga.setText("15000");
+//        } else {
+//            tharga.setText("");
+//        }
+//</editor-fold>
     }//GEN-LAST:event_cbhargaActionPerformed
 
     private void tberatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tberatKeyReleased
@@ -560,7 +603,7 @@ public class Apl_laundry extends javax.swing.JFrame {
             sql = "insert into laundry values ('" + ttgl.getText() + "',"
                     + "'" + tkodepel.getText() + "','" + tnamapel.getText() + "',"
                     + "'" + tnotlp.getText() + "','" + talamat.getText() + "',"
-                    + "'" + tberat.getText() + "','" + tharga.getText() + "','" + ttotalbayar.getText() + "','"+tidbantu.getText()+"')";
+                    + "'" + tberat.getText() + "','" + tharga.getText() + "','" + ttambahan.getText() + "','" + ttotalbayar.getText() + "','" + tidbantu.getText() + "')";
             kon.st = kon.con.createStatement();
             kon.st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "SUKSES TERSIMPAN");
@@ -579,7 +622,7 @@ public class Apl_laundry extends javax.swing.JFrame {
             try {
                 sql = "update laundry set Tanggal='" + ttgl.getText() + "', Kode_pelanggan='" + tkodepel.getText() + "', "
                         + "Nama_pelanggan='" + tnamapel.getText() + "', No_telp='" + tnotlp.getText() + "', Alamat='" + talamat.getText() + "', "
-                        + "Berat_Pakaian='" + tberat.getText() + "', Harga='" + tharga.getText() + "', "
+                        + "Berat_Pakaian='" + tberat.getText() + "', Harga='" + tharga.getText() + "', Tambahan='" + ttambahan.getText() + "',"
                         + "Total_bayar='" + ttotalbayar.getText() + "' where Kode_pelanggan='" + tkodepel.getText() + "'";
                 PreparedStatement edit = kon.con.prepareStatement(sql);
                 edit.execute();
@@ -714,9 +757,9 @@ public class Apl_laundry extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel panelTambahan;
     private javax.swing.JTable tabeldata;
     private javax.swing.JTextArea talamat;
     private javax.swing.JTextField tberat;

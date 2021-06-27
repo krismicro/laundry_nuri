@@ -39,29 +39,29 @@ public class Paket extends javax.swing.JFrame {
         bdelete.setEnabled(false);
         bedit.setEnabled(false);
 
-        tidUser.setEnabled(false);
-        tuserName.setEnabled(false);
-        tpassword.setEnabled(false);
+        tidPaket.setEnabled(false);
+        tnamaPaket.setEnabled(false);
+        thargaPaket.setEnabled(false);
     }
 
     private void aktif() {
         bsimpan.setEnabled(true);
 
-        tidUser.setEnabled(true);
-        tuserName.setEnabled(true);
-        tpassword.setEnabled(true);
+//        tidPaket.setEnabled(true);
+        tnamaPaket.setEnabled(true);
+        thargaPaket.setEnabled(true);
     }
 
     private void kosong() {
-        tidUser.setText("");
-        tuserName.setText("");
-        tpassword.setText("");
+        tidPaket.setText("");
+        tnamaPaket.setText("");
+        thargaPaket.setText("");
     }
 
     private void autoId() {
         try {
             kon.koneksi();
-            String sql = "SELECT Id_bantu as x FROM data_pegawai order by Id_bantu desc";
+            String sql = "SELECT Id_bantu as x FROM paket order by Id_bantu desc";
             Statement st = kon.con.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -75,11 +75,11 @@ public class Paket extends javax.swing.JFrame {
 //                    a = a;
 //                }
 //</editor-fold>
-                tidUser.setText("USR" + Integer.toString(a + 1));
+                tidPaket.setText("PKT" + Integer.toString(a + 1));
                 tidbantu.setText(Integer.toString(a + 1));
             } else {
                 tidbantu.setText("1");
-                tidUser.setText("USR1");
+                tidPaket.setText("PKT1");
             }
             rs.close();
         } catch (Exception e) {
@@ -114,18 +114,18 @@ public class Paket extends javax.swing.JFrame {
     private void table() {
         dtm = new DefaultTableModel();
         dtm.addColumn("NO");
-        dtm.addColumn("ID PEGAWAI");
-        dtm.addColumn("USERNAME");
-        dtm.addColumn("PASSWORD");
+        dtm.addColumn("ID PAKET");
+        dtm.addColumn("NAMA PAKET");
+        dtm.addColumn("HARGA PAKET");
 //        dtm.addColumn("");
 
         try {
             int no = 1;
-            sql = "select * from data_pegawai";
+            sql = "select * from paket";
             kon.st = kon.con.createStatement();
             kon.rs = kon.st.executeQuery(sql);
             while (kon.rs.next()) {
-                dtm.addRow(new Object[]{no++, kon.rs.getString("Id_user"), kon.rs.getString("Username"), kon.rs.getString("Password"), kon.rs.getString("Id_bantu")});
+                dtm.addRow(new Object[]{no++, kon.rs.getString("Id_paket"), kon.rs.getString("Nama_paket"), kon.rs.getString("Harga_paket"), kon.rs.getString("Id_bantu")});
             }
             tableData.setModel(dtm);
 
@@ -149,8 +149,8 @@ public class Paket extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableData = new javax.swing.JTable();
-        tidUser = new javax.swing.JTextField();
-        tuserName = new javax.swing.JTextField();
+        tidPaket = new javax.swing.JTextField();
+        tnamaPaket = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -160,7 +160,7 @@ public class Paket extends javax.swing.JFrame {
         bsimpan = new javax.swing.JButton();
         bupdate = new javax.swing.JButton();
         bdelete = new javax.swing.JButton();
-        tpassword = new javax.swing.JTextField();
+        thargaPaket = new javax.swing.JTextField();
         tidbantu = new javax.swing.JLabel();
         bclose = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -190,22 +190,24 @@ public class Paket extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, 125));
 
-        tidUser.addActionListener(new java.awt.event.ActionListener() {
+        tidPaket.setEditable(false);
+        tidPaket.setEnabled(false);
+        tidPaket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tidUserActionPerformed(evt);
+                tidPaketActionPerformed(evt);
             }
         });
-        getContentPane().add(tidUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 170, -1));
-        getContentPane().add(tuserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 170, -1));
+        getContentPane().add(tidPaket, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 170, -1));
+        getContentPane().add(tnamaPaket, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 170, -1));
 
-        jLabel1.setText("ID User");
+        jLabel1.setText("ID Paket");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
-        jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jLabel2.setText("Nama Paket");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 140, -1));
 
-        jLabel3.setText("Password");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+        jLabel3.setText("Harga Paket");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 170, -1));
 
         btambah.setText("Tambah");
         btambah.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +256,7 @@ public class Paket extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
-        getContentPane().add(tpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 170, -1));
+        getContentPane().add(thargaPaket, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 170, -1));
 
         tidbantu.setText("id bantu");
         getContentPane().add(tidbantu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
@@ -277,7 +279,7 @@ public class Paket extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 1, 24)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("DATA PEGAWAI");
+        jLabel10.setText("DATA PAKET");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel2.add(jLabel10);
         jLabel10.setBounds(150, 10, 290, 33);
@@ -287,17 +289,17 @@ public class Paket extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tidUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tidUserActionPerformed
+    private void tidPaketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tidPaketActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tidUserActionPerformed
+    }//GEN-LAST:event_tidPaketActionPerformed
 
     private void bsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsimpanActionPerformed
         // TODO add your handling code here:
         try {
-            sql = "insert into data_pegawai values ('" + tidUser.getText() + "','" + tidbantu.getText() + "','" + tuserName.getText() + "','" + tpassword.getText() + "')";
+            sql = "insert into paket values ('" + tidPaket.getText() + "','" + tidbantu.getText() + "','" + tnamaPaket.getText() + "','" + thargaPaket.getText() + "')";
             kon.st = kon.con.createStatement();
             kon.st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "USER SUKSES TERSIMPAN");
+            JOptionPane.showMessageDialog(null, "DATA SUKSES TERSIMPAN");
             table();
             kosong();
             bbatalActionPerformed(evt);
@@ -334,9 +336,9 @@ public class Paket extends javax.swing.JFrame {
 
     private void tableDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDataMouseClicked
         // TODO add your handling code here:
-        tidUser.setText(tableData.getValueAt(tableData.getSelectedRow(), 1).toString());
-        tuserName.setText(tableData.getValueAt(tableData.getSelectedRow(), 2).toString());
-        tpassword.setText(tableData.getValueAt(tableData.getSelectedRow(), 3).toString());
+        tidPaket.setText(tableData.getValueAt(tableData.getSelectedRow(), 1).toString());
+        tnamaPaket.setText(tableData.getValueAt(tableData.getSelectedRow(), 2).toString());
+        thargaPaket.setText(tableData.getValueAt(tableData.getSelectedRow(), 3).toString());
 //        tidbantu.setText(tableData.getValueAt(tableData.getSelectedRow(), 4).toString());
         bedit.setEnabled(true);
     }//GEN-LAST:event_tableDataMouseClicked
@@ -346,7 +348,7 @@ public class Paket extends javax.swing.JFrame {
         int ok = JOptionPane.showConfirmDialog(null, "Yakin di Update ?", "Konfirmasi Update", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try{
-            sql = "update data_pegawai set Id_user='" + tidUser.getText() + "', Username='" + tuserName.getText() + "', Password='" + tpassword.getText() + "' where Id_user='"+tidUser.getText()+"'";
+            sql = "update paket set Id_paket='" + tidPaket.getText() + "', Nama_paket='" + tnamaPaket.getText() + "', Harga_paket='" + thargaPaket.getText() + "' where Id_paket='"+tidPaket.getText()+"'";
             PreparedStatement edit = kon.con.prepareStatement(sql);
             edit.execute();
             JOptionPane.showMessageDialog(null, "UPDATE DATA BERHASIL");
@@ -362,7 +364,7 @@ public class Paket extends javax.swing.JFrame {
         int ok = JOptionPane.showConfirmDialog(null, "Yakin dihapus ?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
         if (ok == 0) {
             try{
-            sql = "delete from data_pegawai where Id_user='"+tidUser.getText()+"'";
+            sql = "delete from paket where Id_paket='"+tidPaket.getText()+"'";
             PreparedStatement edit = kon.con.prepareStatement(sql);
             edit.execute();
             JOptionPane.showMessageDialog(null, "HAPUS DATA BERHASIL");
@@ -435,9 +437,9 @@ public class Paket extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableData;
-    private javax.swing.JTextField tidUser;
+    private javax.swing.JTextField thargaPaket;
+    private javax.swing.JTextField tidPaket;
     private javax.swing.JLabel tidbantu;
-    private javax.swing.JTextField tpassword;
-    private javax.swing.JTextField tuserName;
+    private javax.swing.JTextField tnamaPaket;
     // End of variables declaration//GEN-END:variables
 }
