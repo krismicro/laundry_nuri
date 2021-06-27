@@ -53,7 +53,7 @@ public class Menu_utama extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(null);
 
         twelcome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
