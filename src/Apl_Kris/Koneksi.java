@@ -24,7 +24,7 @@ public class Koneksi {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/laundrykris", "root", "");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "DATABASE TIDAK TERKONEKSI 1");
+            JOptionPane.showMessageDialog(null, "DATABASE TIDAK TERKONEKSI"+e);
         }
     }
 }
