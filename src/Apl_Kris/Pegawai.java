@@ -269,11 +269,11 @@ public class Pegawai extends javax.swing.JFrame {
         });
         getContentPane().add(bclose, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 80, 70));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
         jPanel1.setLayout(null);
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 620, 420));
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(153, 255, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         jPanel2.setLayout(null);
 

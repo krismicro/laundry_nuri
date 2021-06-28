@@ -54,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bkeluar.setText("Keluar");
@@ -92,9 +92,9 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Username");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 43, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 240));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 210));
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -118,7 +118,7 @@ public class Login extends javax.swing.JFrame {
             kon.rs = kon.st.executeQuery(sql);
             if (kon.rs.next()) {
                 if (tusername.getText().equals(kon.rs.getString("Username")) && tpassword.getText().equals(kon.rs.getString("Password"))) {
-                    JOptionPane.showMessageDialog(null, "berhasil login");
+                    JOptionPane.showMessageDialog(null, "Berhasil login");
                     Menu_utama menu = new Menu_utama();
                     menu.setVisible(true);
                     this.dispose();

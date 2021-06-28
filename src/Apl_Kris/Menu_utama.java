@@ -40,6 +40,8 @@ public class Menu_utama extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        icon = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         twelcome = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -51,20 +53,27 @@ public class Menu_utama extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(620, 480));
+        setPreferredSize(new java.awt.Dimension(620, 480));
         setResizable(false);
-        setSize(new java.awt.Dimension(0, 0));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setSize(new java.awt.Dimension(620, 480));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
         jPanel1.setLayout(null);
+
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Apl_Kris/washing-machine small.png"))); // NOI18N
+        jPanel1.add(icon);
+        icon.setBounds(20, 30, 60, 60);
+
+        jPanel2.setBackground(new java.awt.Color(153, 255, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        jPanel2.setLayout(null);
 
         twelcome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         twelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         twelcome.setText("welcome");
-        jPanel1.add(twelcome);
-        twelcome.setBounds(0, 70, 390, 25);
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 390, 240));
+        jPanel2.add(twelcome);
+        twelcome.setBounds(110, 20, 390, 25);
 
         jMenu1.setText("File");
 
@@ -131,7 +140,24 @@ public class Menu_utama extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setBounds(0, 0, 404, 251);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
+        );
+
+        setBounds(0, 0, 636, 519);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLogoutActionPerformed
@@ -214,6 +240,7 @@ public class Menu_utama extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel icon;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -221,6 +248,7 @@ public class Menu_utama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem mnKeluar;
     private javax.swing.JMenuItem mnLogout;
     private javax.swing.JLabel twelcome;
