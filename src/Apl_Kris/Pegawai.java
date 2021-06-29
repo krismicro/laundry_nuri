@@ -168,6 +168,7 @@ public class Pegawai extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableData.setModel(new javax.swing.table.DefaultTableModel(
@@ -286,7 +287,8 @@ public class Pegawai extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 60));
 
-        pack();
+        setSize(new java.awt.Dimension(636, 520));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tidUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tidUserActionPerformed

@@ -41,6 +41,9 @@ public class Menu_utama extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         icon = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         twelcome = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -54,7 +57,6 @@ public class Menu_utama extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(620, 480));
-        setPreferredSize(new java.awt.Dimension(620, 480));
         setResizable(false);
         setSize(new java.awt.Dimension(620, 480));
 
@@ -63,7 +65,22 @@ public class Menu_utama extends javax.swing.JFrame {
 
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Apl_Kris/washing-machine small.png"))); // NOI18N
         jPanel1.add(icon);
-        icon.setBounds(20, 30, 60, 60);
+        icon.setBounds(140, 140, 60, 60);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Krislaundry Corp");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(210, 130, 330, 32);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setText("Los Angeles, California");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(210, 160, 310, 30);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("+182112519474");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(210, 190, 260, 30);
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
@@ -73,7 +90,7 @@ public class Menu_utama extends javax.swing.JFrame {
         twelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         twelcome.setText("welcome");
         jPanel2.add(twelcome);
-        twelcome.setBounds(110, 20, 390, 25);
+        twelcome.setBounds(110, 10, 390, 40);
 
         jMenu1.setText("File");
 
@@ -157,7 +174,8 @@ public class Menu_utama extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 636, 519);
+        setSize(new java.awt.Dimension(636, 519));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLogoutActionPerformed
@@ -241,6 +259,9 @@ public class Menu_utama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel icon;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
